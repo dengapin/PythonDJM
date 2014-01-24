@@ -1,22 +1,19 @@
+import re
 
-def creartxt():
-    archi=open('datos.txt','w')
-    archi.close()
+def leer():
+       archi=open('ejemplo.xml','r')
+       linea=archi.readline()
+       contador=0
+       while linea!="":
+              linea=archi.readline()
+              contador +=1
+              tomar(contador,linea.strip())
 
-def grabartxt():
-    archi=open('datos.txt','a')
-    archi.write('Linea 1\n')
-    archi.write('Linea 2\n')
-    archi.write('Linea 3\n')
-
-def leertxt():
-        archi=open('datos.txt','r')
-        for linea in archi.readlines(): 
-             print (linea )
-        archi.close() 
-
+def parsear(contador,linea):
+        linea = re.sub('[<>/]', '', linea)
+        print(str(contador)+str(linea))
+        
+        
      
-creartxt()
-grabartxt()
-leertxt()
+leer()
 
