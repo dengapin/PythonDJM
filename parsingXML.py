@@ -1,15 +1,27 @@
 import re
+
+'''
+Proyecto de Lenguajes de Programacion
+Parseo de un archivo xml e implementacion de queries
+Integrantes: Dennise Pintado
+             Janina Costa
+             Jonathan Mendieta
+'''
  
 def main():
-    archi=open('ejemplo.xml','r')
+    archi=open('wurf.xml','r')
     linea=archi.readline()
     cont=0
+    #El archivo se lee hasta que ya no encuentre mas lineas en el xml
     while linea!="":
            linea=archi.readline()
+           #Se reemplazan estos caracteres en espacio en blanco
            linea=re.sub('[/<>=]', ' ', linea)
            lineajunta= linea
+           #Se separan por comillas la lista que correspondera a los atributos
            atributos = linea.split('"')
            arbolito=[]
+           #Si la dimension de la lista es la indicada correspondera sin duda al grupo mencionado
            if len(atributos)==7:
                listaDevice=[]
                for i in range(7):
@@ -39,7 +51,7 @@ def main():
                                     listaCapability.append(value)
                listaGroup.append(listaCapability)
                listaDevice.append(listaGroup)
-               
+           #El device terminara cuando encuentre el tag de cierre de Device    
            if len(linea)==12:
                cont=cont+1
                print("*****-----------------------------Device"+" "+str(cont)+"-----------------------*******")
