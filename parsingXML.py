@@ -34,6 +34,15 @@ def main():
                           if i==5:
                              fall_back=atributos[i]
                              listaDevice.append(fall_back)
+           '''Querie mostrar devices en los que el fall_back sea un string especifico
+              if len(atributos)==7:
+               listaDevice=[]
+               for i in range(7):
+                          if i==5:
+                             fall_back=atributos[i]
+                             if fall_back=="nokia_6681_ver1":
+                                listaDevice.append(fall_back)
+                                print(listaDevice) '''
            elif len(atributos)==3:
                listaGroup=[]
                for i in range(3):
