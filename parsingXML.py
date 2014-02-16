@@ -68,19 +68,21 @@ def main():
                print("*****-----------------------------Device"+" "+str(cont)+"-----------------------*******")
                print(listaDevice) 
                arbolito.append(listaDevice)
-    print searchStringinID(arbolito,["sony","sub"])
+    #print searchDeviceByID(arbolito,["sony","sub"])
+    #print searchDevicebyFallback(arbolito,"sonyericsson_p990i_ver1")
+    #print searchDevicebyCapability([["1","2","3",["GG",["como","false"],["comoxA","false"],["waffle","true"],["sardina","true"]]],["1","2","3",["XD",["waffle","true"],["como","false"],["sardina","true"]]]],[["waffle","true"],["sardina","true"]])
 
 ##Funciones para buscar Query por ID
 #---------------------------------------------------------------
 #Funcion para analizar el query de encontrar substrings en el ID
-def searchStringinID(deviceList,idSubstringList):
+def searchDeviceByID(deviceList,idSubstringList):
 	devicesFoundList = []
 	for device in deviceList:
 		if stringContainsStrings(device[0],idSubstringList):
 			devicesFoundList.append(device)
 	return devicesFoundList
 
-#Funcion que verifica si existen substrings en el string dado, devuelve Verdadero si los substring son encontrados y Falso si no lo son.
+#Funcion que verifica si existen substrings en el string dado, devuelve Verdadero si los substring son encontrados y Falso si no
 def stringContainsStrings(deviceID,stringList):
 	boolTester = []
 	for i in range (0,len(stringList)):
@@ -92,6 +94,45 @@ def stringContainsStrings(deviceID,stringList):
 		if boolTester[j] == False:
 			return False
 	return True
+#---------------------------------------------------------------	
+
+#Funcion para buscar Query por User_Agent
+def searchDevicebyFallback(deviceList,user_agent):
+	deviceFoundList = []
+	for device in deviceList:
+		if fallback in device[1]:
+			deviceFoundList.append(device)
+	return deviceFoundList
+
+#Funcion para buscar Query por Fallback
+def searchDevicebyFallback(deviceList,fallback):
+	deviceFoundList = []
+	for device in deviceList:
+		if fallback in device[2]:
+			deviceFoundList.append(device)
+	return deviceFoundList
+
+##Funcion para buscar Query por capability
+#---------------------------------------------------------------	
+#Funcion que busca cada device en el arbol y verifica sus capabilities con el valor booleano dado
+def searchDevicebyCapability(deviceList,capabilityList):
+	deviceFoundList = []
+	for device in deviceList:
+		if capabilityContained(device,capabilityList):
+			deviceFoundList.append(device)
+	return deviceFoundList
+
+#Funcion para verificar si existe un device con tales capabilities, retorna Verdadero si TODOS los capabilities son encontrados, y Falso si no	
+def capabilityContained(device,capabilityList):
+	countTester = 0
+	for capability in capabilityList:
+		for i in range(3,len(device)):
+			for j in range(1,len(device[i])):
+				if (device[i][j][0]==capability[0] and device[i][j][1]==capability[1]):
+					countTester+=1
+					if countTester==len(capabilityList):
+						return True
+	return False			
 #---------------------------------------------------------------	
 
 if __name__ == '__main__':
