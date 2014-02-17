@@ -18,12 +18,53 @@ Integrantes: Dennise Pintado
 #                             if fall_back=="nokia_6681_ver1":
 #                                listaDevice.append(fall_back)
 #                                print(listaDevice)
- 
 def main():
-    archi=open('test.xml','r')
+	testList = [["olakase","2","3",["GG",["como","false"],["comoxA","false"],["waffle","false"],["sardina","true"]]],["olakase2","2","3",["XD",["waffle","true"],["como","false"],["sardina","true"]]]]
+	option = 0
+	menuOptions = {1:menuBuscarxID,2:menuBuscarxUser,3:menuBuscarxFallback,4:menuBuscarxCapability,5:menuAcercade}
+	while option is not 6:
+		menuGraphics()
+		try:
+			option=int(raw_input('Select option:'))
+			if option < 6 and option >0:
+				menuOptions[option](testList)
+				raw_input("\nPress Any Key to Continue")
+			elif option is not 6:
+				print "Invalid option"
+		except ValueError:
+			print "ERROR: Not a number"
+			raw_input("\nPress Any Key to Continue")
+	#print formaArbol()
+
+def menuGraphics():
+	print "                  (    (     (           )    *     (      "
+	print " (  (             )\ ) )\ )  )\ )     ( /(  (  `    )\ )   "
+	print " )\))(   '    (  (()/((()/( (()/(     )\()) )\))(  (()/(   "
+	print "((_)()\ )     )\  /(_))/(_)) /(_))   ((_)\ ((_)()\  /(_))  "
+	print "_(())\_)() _ ((_)(_)) (_))_|(_))     __((_)(_()((_)(_))    "
+	print "\ \((_)/ /| | | || _ \| |_  | |      \ \/ /|  \/  || |     "
+	print " ( \/\/ / | |_| ||   /| __| | |__  _  >  < | |\/| || |__   "
+	print "  \_/(_/   \___/ |_|_\|_|   |____|(_)/_/\_\|_|  |_||____|  "
+	print "     )\ )                                                  "
+	print "    (()/( (                (         (          (  (       "
+	print "     /(_)))(    (    (    ))\ (   (  )\   (     )\))(      "
+	print "    (_)) (()\   )\   )\  /((_))\  )\((_)  )\ ) ((_))\      "
+	print "    | _ \ ((_) ((_) ((_)(_)) ((_)((_)(_) _(_/(  (()(_)     "
+	print "    |  _/| '_|/ _ \/ _| / -_)(_-<(_-<| || ' \))/ _` |      "
+	print "    |_|  |_|  \___/\__| \___|/__//__/|_||_||_| \__, |      "
+	print "                                               |___/       "
+	print "\nMenu:\n"
+	print "1.Search by ID"
+	print "2.Search by User_Agent"
+	print "3.Search by Fallback"
+	print "4.Search by Capabilities"
+	print "5.About"
+	print "6.Exit\n"
+
+def formaArbol():
+    archi=open('ejemplo.xml','r')
     linea=archi.readline()
     cont=0
-    arbolito=[]
     #El archivo se lee hasta que ya no encuentre mas lineas en el xml
     while linea!="":
            linea=archi.readline()
@@ -32,6 +73,7 @@ def main():
            lineajunta= linea
            #Se separan por comillas la lista que correspondera a los atributos
            atributos = linea.split('"')
+           arbolito=[]
            #Si la dimension de la lista es la indicada correspondera sin duda al grupo mencionado
            if len(atributos)==7:
                listaDevice=[]
@@ -68,9 +110,47 @@ def main():
                print("*****-----------------------------Device"+" "+str(cont)+"-----------------------*******")
                print(listaDevice) 
                arbolito.append(listaDevice)
+    #return arbolito        
     #print searchDeviceByID(arbolito,["sony","sub"])
     #print searchDevicebyFallback(arbolito,"sonyericsson_p990i_ver1")
-    #print searchDevicebyCapability([["1","2","3",["GG",["como","false"],["comoxA","false"],["waffle","true"],["sardina","true"]]],["1","2","3",["XD",["waffle","true"],["como","false"],["sardina","true"]]]],[["waffle","true"],["sardina","true"]])
+    #print searchDevicebyCapability([["1","2","3",["GG",["como","false"],["comoxA","false"],["waffle","false"],["sardina","true"]]],["1","2","3",["XD",["waffle","true"],["como","false"],["sardina","true"]]]],[["como","false"],["sardina","true"]])
+
+##Funciones para Menu Principal
+#---------------------------------------------------------------
+#Menu: Buscar por ID
+def menuBuscarxID(deviceList):
+	IDs = []
+	Verifier = ""
+	print "Input the ID String to search (can contain substrings), press 'Enter' to enter a new value and type 'OK' to finish:"
+	while Verifier != "OK":
+		Verifier = raw_input('')
+		if Verifier != "OK":
+			IDs.append(Verifier)
+	print searchDeviceByID(deviceList,IDs)
+	
+#Menu: Buscar por User_Agent
+def menuBuscarxUser(deviceList):
+	print searchDevicebyUserAgent(deviceList,raw_input("Input the User_Agent to search:\n"))
+
+#Menu: Buscar por Fallback
+def menuBuscarxFallback(deviceList):
+	print searchDevicebyFallback(deviceList,raw_input("Input the Fallback to search:\n"))
+
+#Menu: Buscar por Capability
+def menuBuscarxCapability(deviceList):
+	capabilities = []
+	verifier = ""
+	print "Input the capabilities to search, as follow: 'capability_name value', press 'Enter' to enter a new value and type 'OK' to finish:"
+	while verifier != "OK":
+		verifier = raw_input('')
+		if verifier != "OK":
+			capabilities.append(verifier.split(' '))
+	print searchDevicebyCapability(deviceList,capabilities)
+
+#Menu: Acerca de
+def menuAcercade(deviceList):
+	print "\nProject of Programming Languages WURFL.XML Processing\n\nCollaborators:\n\n-Jonathan Mendieta\n-Janina Costa\n-Denisse Pintado"
+#---------------------------------------------------------------
 
 ##Funciones para buscar Query por ID
 #---------------------------------------------------------------
@@ -97,10 +177,10 @@ def stringContainsStrings(deviceID,stringList):
 #---------------------------------------------------------------	
 
 #Funcion para buscar Query por User_Agent
-def searchDevicebyFallback(deviceList,user_agent):
+def searchDevicebyUserAgent(deviceList,user_agent):
 	deviceFoundList = []
 	for device in deviceList:
-		if fallback in device[1]:
+		if user_agent in device[1]:
 			deviceFoundList.append(device)
 	return deviceFoundList
 
@@ -122,17 +202,23 @@ def searchDevicebyCapability(deviceList,capabilityList):
 			deviceFoundList.append(device)
 	return deviceFoundList
 
-#Funcion para verificar si existe un device con tales capabilities, retorna Verdadero si TODOS los capabilities son encontrados, y Falso si no	
+#Funcion para verificar si existe un device con tales capabilities, retorna Verdadero si TODOS los capabilities son encontrados, y Falso si por lo menos uno no	es
 def capabilityContained(device,capabilityList):
 	countTester = 0
 	for capability in capabilityList:
+		flag = 0
 		for i in range(3,len(device)):
 			for j in range(1,len(device[i])):
 				if (device[i][j][0]==capability[0] and device[i][j][1]==capability[1]):
 					countTester+=1
 					if countTester==len(capabilityList):
 						return True
-	return False			
+					flag+=1
+					break
+			if flag == 1:
+				break
+		if flag == 0:
+			return False
 #---------------------------------------------------------------	
 
 if __name__ == '__main__':
