@@ -30,36 +30,36 @@ def main():
 				menuOptions[option](testList)
 				raw_input("\nPress Any Key to Continue")
 			elif option is not 6:
-				print "Invalid option"
+				print ("Invalid option")
 		except ValueError:
-			print "ERROR: Not a number"
+			print ("ERROR: Not a number")
 			raw_input("\nPress Any Key to Continue")
 	#print formaArbol()
 
 def menuGraphics():
-	print "                  (    (     (           )    *     (      "
-	print " (  (             )\ ) )\ )  )\ )     ( /(  (  `    )\ )   "
-	print " )\))(   '    (  (()/((()/( (()/(     )\()) )\))(  (()/(   "
-	print "((_)()\ )     )\  /(_))/(_)) /(_))   ((_)\ ((_)()\  /(_))  "
-	print "_(())\_)() _ ((_)(_)) (_))_|(_))     __((_)(_()((_)(_))    "
-	print "\ \((_)/ /| | | || _ \| |_  | |      \ \/ /|  \/  || |     "
-	print " ( \/\/ / | |_| ||   /| __| | |__  _  >  < | |\/| || |__   "
-	print "  \_/(_/   \___/ |_|_\|_|   |____|(_)/_/\_\|_|  |_||____|  "
-	print "     )\ )                                                  "
-	print "    (()/( (                (         (          (  (       "
-	print "     /(_)))(    (    (    ))\ (   (  )\   (     )\))(      "
-	print "    (_)) (()\   )\   )\  /((_))\  )\((_)  )\ ) ((_))\      "
-	print "    | _ \ ((_) ((_) ((_)(_)) ((_)((_)(_) _(_/(  (()(_)     "
-	print "    |  _/| '_|/ _ \/ _| / -_)(_-<(_-<| || ' \))/ _` |      "
-	print "    |_|  |_|  \___/\__| \___|/__//__/|_||_||_| \__, |      "
-	print "                                               |___/       "
-	print "\nMenu:\n"
-	print "1.Search by ID"
-	print "2.Search by User_Agent"
-	print "3.Search by Fallback"
-	print "4.Search by Capabilities"
-	print "5.About"
-	print "6.Exit\n"
+	print ("                  (    (     (           )    *     (      ")
+	print (" (  (             )\ ) )\ )  )\ )     ( /(  (  `    )\ )   ")
+	print (" )\))(   '    (  (()/((()/( (()/(     )\()) )\))(  (()/(   ")
+	print ("((_)()\ )     )\  /(_))/(_)) /(_))   ((_)\ ((_)()\  /(_))  ")
+	print ("_(())\_)() _ ((_)(_)) (_))_|(_))     __((_)(_()((_)(_))    ")
+	print ("\ \((_)/ /| | | || _ \| |_  | |      \ \/ /|  \/  || |     ")
+	print (" ( \/\/ / | |_| ||   /| __| | |__  _  >  < | |\/| || |__   ")
+	print ("  \_/(_/   \___/ |_|_\|_|   |____|(_)/_/\_\|_|  |_||____|  ")
+	print ("     )\ )                                                  ")
+	print ("    (()/( (                (         (          (  (       ")
+	print ("     /(_)))(    (    (    ))\ (   (  )\   (     )\))(      ")
+	print ("    (_)) (()\   )\   )\  /((_))\  )\((_)  )\ ) ((_))\      ")
+	print ("    | _ \ ((_) ((_) ((_)(_)) ((_)((_)(_) _(_/(  (()(_)     ")
+	print ("    |  _/| '_|/ _ \/ _| / -_)(_-<(_-<| || ' \))/ _` |      ")
+	print ("    |_|  |_|  \___/\__| \___|/__//__/|_||_||_| \__, |      ")
+	print ("                                               |___/       ")
+	print ("\nMenu:\n")
+	print ("1.Search by ID")
+	print ("2.Search by User_Agent")
+	print ("3.Search by Fallback")
+	print ("4.Search by Capabilities")
+	print ("5.About")
+	print ("6.Exit\n")
 
 def formaArbol():
     archi=open('ejemplo.xml','r')
@@ -122,56 +122,56 @@ def menuBuscarxID(deviceList):
 	IDs = []
 	devicesFound = []
 	Verifier = ""
-	print "\nInput the ID String to search (can contain substrings), press 'Enter' to enter a new value and type 'OK' to finish:\n"
+	print ("\nInput the ID String to search (can contain substrings), press 'Enter' to enter a new value and type 'OK' to finish:\n")
 	while Verifier != "OK":
 		Verifier = raw_input('')
 		if Verifier != "OK":
 			IDs.append(Verifier)
 	devicesFound = searchDeviceByID(deviceList,IDs)
-	print "\nDEVICES FOUND:\n"
+	print ("\nDEVICES FOUND:\n")
 	for i in range (0,len(devicesFound)):
-		print devicesFound[i][0]
-	print "\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound))
+		print (devicesFound[i][0])
+	print ("\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound)))
 	
 #Menu: Buscar por User_Agent
 def menuBuscarxUser(deviceList):
 	devicesFound = []
 	User_agent = raw_input("\nInput the User_Agent to search:\n")
 	devicesFound = searchDevicebyUserAgent(deviceList,User_agent)
-	print "\nDEVICES FOUND:\n"
+	print ("\nDEVICES FOUND:\n")
 	for i in range (0,len(devicesFound)):
-		print devicesFound[i][0]
-	print "\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound))
+		print (devicesFound[i][0])
+	print ("\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound)))
 
 #Menu: Buscar por Fallback
 def menuBuscarxFallback(deviceList):
 	devicesFound = []
 	Fallback = raw_input("\nInput the Fallback to search:\n")
 	devicesFound = searchDevicebyFallback(deviceList, Fallback)
-	print "\nDEVICES FOUND:\n"
+	print ("\nDEVICES FOUND:\n")
 	for i in range (0,len(devicesFound)):
-		print devicesFound[i][0]
-	print "\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound))	
+		print (devicesFound[i][0])
+	print ("\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound)))	
 
 #Menu: Buscar por Capability
 def menuBuscarxCapability(deviceList):
 	capabilities = []
 	devicesFound = []
 	verifier = ""
-	print "\nInput the capabilities to search, as follow: 'capability_name value', press 'Enter' to enter a new value and type 'OK' to finish:\n"
+	print ("\nInput the capabilities to search, as follow: 'capability_name value', press 'Enter' to enter a new value and type 'OK' to finish:\n")
 	while verifier != "OK":
 		verifier = raw_input('')
 		if verifier != "OK":
 			capabilities.append(verifier.split(' '))
 	devicesFound = searchDeviceByID(deviceList,IDs)
-	print "\nDEVICES FOUND:\n"
+	print ("\nDEVICES FOUND:\n")
 	for i in range (0,len(devicesFound)):
-		print devicesFound[i][0]
-	print "\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound))
+		print (devicesFound[i][0])
+	print ("\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound)))
 
 #Menu: Acerca de
 def menuAcercade(deviceList):
-	print "\nProject of Programming Languages WURFL.XML Processing\n\nCollaborators:\n\n-Jonathan Mendieta\n-Janina Costa\n-Denisse Pintado"
+	print ("\nProject of Programming Languages WURFL.XML Processing\n\nCollaborators:\n\n-Jonathan Mendieta\n-Janina Costa\n-Denisse Pintado")
 #---------------------------------------------------------------
 
 ##Funciones para buscar Query por ID

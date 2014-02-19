@@ -90,39 +90,55 @@
 
 \section{Introducción}
 El siguiente proyecto es sobre el lenguaje de programación Python.\\ 
-\\En el siguiente documentos redactaremos detalladamente el funcionamiento de nuestro código, el procedamiento y los pasos que utilizamos para desarrollar el codigo \\
+\\En el siguiente documentos redactaremos detalladamente el funcionamiento de nuestro código, el procesamiento y los pasos que utilizamos para desarrollar el codigo \\
 \\Para conocer más sobre este lenguaje de programación veremos las características más importantes,  como surgió y los requisitos para su correcta instalación. \\
 \\El proyecto se realiza por el interés de aprender sobre un nuevo lenguaje el cual nos aporte más conocimientos sobre el amplio mundo de la programación.\\
-\\
-\\ \\
+
+
+
+
+
 
 OBJETIVOS:
-\\ \\
-\\El objetivo es poder leer de un archivo XML.\\\\\\
 
-\section{Python}
-Python - Ventajas y Desventajas
+El objetivo es poder leer de un archivo XML.
+
+\section{Explicacion proyecto Python}
 Python es un lenguaje interpretado, orientado a objetos de propósito general. Python permite mantener de forma sencilla interacción con el sistema operativo, y resulta muy adecuado para manipular archivos de texto. 
-\newline
-\\
-\newline
-\\
+El parseo que se pidio en este proyecto, se basa en tomar un documento xml, y poder separar mediante listas o tuplas los atributos de cada tag. Se nos pido no utilizar libreriaa, por lo cual se opto hacer una lista de cada linea que se tomaba para poder de esta manera reconocer que tag era. En nuestro caso se separo la lista por comillas esto quiere decir que se declaro un TagDevice que tendria la longitud de 7 o 9 segun sea el caso, lo tomaria y lo colocaria en una lista que separaria los atributos con la finalidad de poderlos aceder mediante for o if. Para cada Tag se noto que se tenia siempre la misma cantidad de comillas entoces se definio gracias a esto los tags , teniendo 7 o 9 para device, 3 para group y 5 para capability.Una vez definido esto se formo un arbol haciendo que el tag Device siempre seria la raiz y al encontrar el tag de cierre del mismo , este generaria un arbol en forma de lista. Entonces si queriamos aceder a una hoja esta podria ser acedida solo si se hace el recorrido respectivo del arbol up-down.Luego se hizo un disenio para la parte del main del proyecto para realizar consultas rapidas. 
+
+
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.8]{imagenes/interfaz.png}
+\caption{Interfaz Python}
+\label{fig: threadsVsSync}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.8]{imagenes/queries.png}
+\caption{Querie}
+\label{fig: threadsVsSync}
+\end{figure}
+
 
 
 \section{ Ventajas y Desventajas}
 VENTAJAS\\
 Desarrollo más rápido : Puedes escribir un programa, salvarlo y ejecutarlo. En un lenguaje compilado tienes que pasar por los pasos de compilar y ligar el software, lo cual puede ser un proceso lento.
 Multiplataforma : El mismo código funciona en cualquier arquitectura, la única condición es que disponga del intérprete del lenguaje. No es necesario compilar el código una vez para cada arquitectura.\\\\
+Flexibilidad : Permite muchas cosas y es faill de aprender
 \newline
 DESVENTAJAS\\\\
 Lentitud : Los programas interpretados son más lentos que los compilados. Sin embargo los programas interpretados suelen ser cortos, en los que la diferencia es inapreciable.
-\newline
-\\
-\newline
-\\
 
-\section{ Problemas que se presentaron}
 
+\section{ Conclusiones}
+Pyhton es un lenguaje muy sencillo lo unico que se complico al momento de trabajar con el fue la indexacion. Por ser un lenguaje
+orientado a objeto, tiene muchas similitudes con Java pero tiene ventajas sobre java muy grandes como la flexibilidad, algo que fue muy notorio al momento de programar en el.En general fue muy satisfactorio conocer este lenguaje.
 
 
 
