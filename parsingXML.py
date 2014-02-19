@@ -9,33 +9,23 @@ Integrantes: Dennise Pintado
              Jonathan Mendieta
 '''
 
-#Querie mostrar devices en los que el fall_back sea un string especifico
-#              if len(atributos)==7:
-#               listaDevice=[]
-#               for i in range(7):
-#                          if i==5:
-#                             fall_back=atributos[i]
-#                             if fall_back=="nokia_6681_ver1":
-#                                listaDevice.append(fall_back)
-#                                print(listaDevice)
 def main():
-	testList = [["olakase","2","3",["GG",["como","false"],["comoxA","false"],["waffle","false"],["sardina","true"]]],["olakase2","2","3",["XD",["waffle","true"],["como","false"],["sardina","true"]]]]
+	testList = crearArbol()
 	option = 0
-	menuOptions = {1:menuBuscarxID,2:menuBuscarxUser,3:menuBuscarxFallback,4:menuBuscarxCapability,5:menuAcercade}
-	while option is not 6:
+	menuOptions = {1:menuBuscarxID,2:menuBuscarxUser,3:menuBuscarxFallback,4:menuBuscarxCapability,5:menuAcercade,6:menuBuscarxYear}
+	while option is not 7:
 		menuGraphics()
 		try:
 			option=int(raw_input('Select option:'))
-			if option < 6 and option >0:
+			if option < 7 and option >0:
 				menuOptions[option](testList)
 				raw_input("\nPress Any Key to Continue")
-			elif option is not 6:
+			elif option is not 7:
 				print ("Invalid option")
 		except ValueError:
 			print ("ERROR: Not a number")
 			raw_input("\nPress Any Key to Continue")
-	#print formaArbol()
-
+	
 def menuGraphics():
 	print ("                  (    (     (           )    *     (      ")
 	print (" (  (             )\ ) )\ )  )\ )     ( /(  (  `    )\ )   ")
@@ -59,61 +49,67 @@ def menuGraphics():
 	print ("3.Search by Fallback")
 	print ("4.Search by Capabilities")
 	print ("5.About")
-	print ("6.Exit\n")
+	print ("6.Search by year")
+	print ("7.Exit\n")
 
-def formaArbol():
-    archi=open('ejemplo.xml','r')
-    linea=archi.readline()
-    cont=0
-    #El archivo se lee hasta que ya no encuentre mas lineas en el xml
-    while linea!="":
-           linea=archi.readline()
-           #Se reemplazan estos caracteres en espacio en blanco
-           linea=re.sub('[/<>=]', ' ', linea)
-           lineajunta= linea
-           #Se separan por comillas la lista que correspondera a los atributos
-           atributos = linea.split('"')
-           arbolito=[]
-           #Si la dimension de la lista es la indicada correspondera sin duda al grupo mencionado
-           if len(atributos)==7:
-               listaDevice=[]
-               for i in range(7):
-                          if i==1:
-                             id_device=atributos[i]
-                             listaDevice.append(id_device)
-                          if i==3:
-                             user_agent=atributos[i]
-                             listaDevice.append(user_agent)
-                          if i==5:
-                             fall_back=atributos[i]
-                             listaDevice.append(fall_back)
-           elif len(atributos)==3:
-               listaGroup=[]
-               for i in range(3):
-                                 if i==1:
-                                    id_group=atributos[i]
-                                    listaGroup.append(id_group)
-           elif len(atributos)==5:
-               listaCapability=[]
-               for i in range(5):
-                                 if i==1:
-                                    name=atributos[i]
-                                    listaCapability.append(name)
-                                 if i==3:
-                                    value=atributos[i]
-                                    listaCapability.append(value)
-               listaGroup.append(listaCapability)
-               listaDevice.append(listaGroup)
-           #El device terminara cuando encuentre el tag de cierre de Device
-           if len(linea)==12:
-               cont=cont+1
-               print("*****-----------------------------Device"+" "+str(cont)+"-----------------------*******")
-               print(listaDevice) 
-               arbolito.append(listaDevice)
-    #return arbolito        
-    #print searchDeviceByID(arbolito,["sony","sub"])
-    #print searchDevicebyFallback(arbolito,"sonyericsson_p990i_ver1")
-    #print searchDevicebyCapability([["1","2","3",["GG",["como","false"],["comoxA","false"],["waffle","false"],["sardina","true"]]],["1","2","3",["XD",["waffle","true"],["como","false"],["sardina","true"]]]],[["como","false"],["sardina","true"]])
+def crearArbol():
+	arbol = []
+	device = []
+	capabilities = []
+	archivo=open('wurfl-2.3.xml','r')
+	linea=archivo.readline()
+	while "<devices>" not in linea:
+		linea=archivo.readline()
+	linea = archivo.readline()
+	linea=re.sub('[/<>=]"', '', linea)
+	while "devices" not in linea:
+		if "device" in linea:
+			if device != []:
+				arbol.append(device)
+				device = []
+			if "id" in linea and "user_agent" in linea and "fall_back" in linea:
+				linea = linea.split("id")
+				linea =  ','.join(linea)
+				linea = linea.split("user_agent")
+				linea =  ','.join(linea)
+				linea = linea.split("fall_back")
+				linea =  ','.join(linea)
+				linea = linea.split('"')
+				linea = ','.join(linea)
+				linea = linea.split(',')
+				device.append(linea[1])
+				device.append(linea[3])
+				device.append(linea[5])
+			linea = archivo.readline()
+			linea=re.sub('[/<>=]"', '', linea)
+		elif "group" in linea and "id" in linea:
+			
+			linea = linea.split("id")
+			linea =  ','.join(linea)
+			linea = linea.split('"')
+			linea = ','.join(linea)
+			linea = linea.split(',')
+			capabilities.append(linea[1])
+			linea = archivo.readline()
+			linea=re.sub('[/<>=]"', '', linea)
+			if "capability" in linea:
+				while "capability" in linea:
+					linea = linea.split("capability name")
+					linea =  ','.join(linea)
+					linea = linea.split("value")
+					linea =  ','.join(linea)
+					linea = linea.split('"')
+					linea = ','.join(linea)
+					linea = linea.split(',')
+					capabilities.append([linea[1],linea[3]])
+					linea = archivo.readline()
+					linea=re.sub('[/<>=]"', '', linea)
+			device.append(capabilities)
+			linea = archivo.readline()
+			linea=re.sub('[/<>=]"', '', linea)
+	
+	return arbol
+	
 
 ##Funciones para Menu Principal
 #---------------------------------------------------------------
@@ -163,7 +159,7 @@ def menuBuscarxCapability(deviceList):
 		verifier = raw_input('')
 		if verifier != "OK":
 			capabilities.append(verifier.split(' '))
-	devicesFound = searchDeviceByID(deviceList,IDs)
+	devicesFound = searchDevicebyCapability(deviceList,capabilities)
 	print ("\nDEVICES FOUND:\n")
 	for i in range (0,len(devicesFound)):
 		print (devicesFound[i][0])
