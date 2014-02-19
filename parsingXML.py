@@ -120,32 +120,54 @@ def formaArbol():
 #Menu: Buscar por ID
 def menuBuscarxID(deviceList):
 	IDs = []
+	devicesFound = []
 	Verifier = ""
-	print "Input the ID String to search (can contain substrings), press 'Enter' to enter a new value and type 'OK' to finish:"
+	print "\nInput the ID String to search (can contain substrings), press 'Enter' to enter a new value and type 'OK' to finish:\n"
 	while Verifier != "OK":
 		Verifier = raw_input('')
 		if Verifier != "OK":
 			IDs.append(Verifier)
-	print searchDeviceByID(deviceList,IDs)
+	devicesFound = searchDeviceByID(deviceList,IDs)
+	print "\nDEVICES FOUND:\n"
+	for i in range (0,len(devicesFound)):
+		print devicesFound[i][0]
+	print "\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound))
 	
 #Menu: Buscar por User_Agent
 def menuBuscarxUser(deviceList):
-	print searchDevicebyUserAgent(deviceList,raw_input("Input the User_Agent to search:\n"))
+	devicesFound = []
+	User_agent = raw_input("\nInput the User_Agent to search:\n")
+	devicesFound = searchDevicebyUserAgent(deviceList,User_agent)
+	print "\nDEVICES FOUND:\n"
+	for i in range (0,len(devicesFound)):
+		print devicesFound[i][0]
+	print "\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound))
 
 #Menu: Buscar por Fallback
 def menuBuscarxFallback(deviceList):
-	print searchDevicebyFallback(deviceList,raw_input("Input the Fallback to search:\n"))
+	devicesFound = []
+	Fallback = raw_input("\nInput the Fallback to search:\n")
+	devicesFound = searchDevicebyFallback(deviceList, Fallback)
+	print "\nDEVICES FOUND:\n"
+	for i in range (0,len(devicesFound)):
+		print devicesFound[i][0]
+	print "\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound))	
 
 #Menu: Buscar por Capability
 def menuBuscarxCapability(deviceList):
 	capabilities = []
+	devicesFound = []
 	verifier = ""
-	print "Input the capabilities to search, as follow: 'capability_name value', press 'Enter' to enter a new value and type 'OK' to finish:"
+	print "\nInput the capabilities to search, as follow: 'capability_name value', press 'Enter' to enter a new value and type 'OK' to finish:\n"
 	while verifier != "OK":
 		verifier = raw_input('')
 		if verifier != "OK":
 			capabilities.append(verifier.split(' '))
-	print searchDevicebyCapability(deviceList,capabilities)
+	devicesFound = searchDeviceByID(deviceList,IDs)
+	print "\nDEVICES FOUND:\n"
+	for i in range (0,len(devicesFound)):
+		print devicesFound[i][0]
+	print "\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound))
 
 #Menu: Acerca de
 def menuAcercade(deviceList):
