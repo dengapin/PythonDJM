@@ -164,9 +164,41 @@ def menuBuscarxCapability(deviceList):
 		print (devicesFound[i][0])
 	print ("\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound)))
 
+#MenuxYear
+def menuBuscarxyear(deviceList):
+	devicesFound = []
+	flag = 0
+	for device in deviceList:
+		for i in range(3,len(device)):
+				for j in range(1,len(device[i])):
+					if device[i][j][0] == "release_date" and "2011" in device[i][j][1]:
+						devicesFound.append(device)
+						flag+=1
+						break
+				if flag == 1:
+					flag = 0
+					break
+	print ("\nDEVICES FOUND:\n")
+	for i in range (0,len(devicesFound)):
+		print (devicesFound[i][0])
+	print ("\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound)))
 #Menu: Acerca de
 def menuAcercade(deviceList):
 	print ("\nProject of Programming Languages WURFL.XML Processing\n\nCollaborators:\n\n-Jonathan Mendieta\n-Janina Costa\n-Denisse Pintado")
+	
+#MEnuSonyericson
+def menuBuscarSonyericsson(deviceList):
+	devicesFound = []
+	for device in deviceList:
+		if "sonyericsson" in device[2]:
+			devicesFound.append(device)
+		elif "sonyericsson" in device[2] and "generic" in device[2]:
+			devicesFound.append(device)
+			break
+	print ("\nDEVICES FOUND:\n")
+	for i in range (0,len(devicesFound)):
+		print (devicesFound[i][0])
+	print ("\nNUMBER OF DEVICE FOUND: "+str(len(devicesFound)))	
 			
 #---------------------------------------------------------------
 
